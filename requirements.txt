@@ -1,0 +1,9 @@
+pypdf
+python-dotenv
+pinecone-client[grpc]
+langchain-pinecone
+langchain_community
+langchain_openai
+langchain_experimental
+torch>=1.6.0
+-e .
