@@ -32,9 +32,9 @@ embeddings = download_hugging_face_embeddings()
 # Set up vectorstore retriever from Pinecone (this should already be created)
 # Example assumes an index and namespace are available
 retriever = Pinecone.from_existing_index(
-    index_name="your-pinecone-index-name",  # Replace with your Pinecone index
+    index_name="medicalchatbot",  
     embedding=embeddings,
-    namespace="your-namespace"              # Replace with your namespace
+    namespace="Anil"              
 ).as_retriever()
 
 # Initialize XAI LLM
@@ -80,4 +80,4 @@ def chat():
 
 # Run app
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0",port=8080,debug=True)
