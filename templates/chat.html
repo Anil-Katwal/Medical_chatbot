@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chat with AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <h1>Chat with AI</h1>
+    <div id="chatBox"></div>
+    <input type="text" id="userInput" placeholder="Ask me anything..." />
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        function sendMessage() {
+            const msg = $("#userInput").val();
+            if (!msg.trim()) return;
+
+            $("#chatBox").append("<p><strong>You:</strong> " + msg + "</p>");
+
+            $.get("/get", { msg: msg }, function (data) {
+                $("#chatBox").append("<p><strong>AI:</strong> " + data.answer + "</p>");
+                $("#userInput").val("");
+                $("#chatBox").scrollTop($("#chatBox")[0].scrollHeight);
+            });
+        }
+
+        // Enter key also sends message
+        $("#userInput").on("keypress", function (e) {
+            if (e.which === 13) sendMessage();
+        });
+    </script>
+</body>
+
+</html>
